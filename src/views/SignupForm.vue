@@ -3,6 +3,7 @@ import { computed, reactive, ref, watch } from 'vue'
 import { useField } from 'vee-validate'
 import { type PaymentIframe, useSubscriptionStore } from '@/stores'
 import DialogModal from '@/views/toasts/DialogModal.vue'
+import router from '@/router'
 
 const signUpData = reactive({
   firstName: '',
@@ -223,24 +224,37 @@ const signUp = () => {
     console.log('Something is wrong')
   }
 }
+
+const goBack = ()=>{
+router.go(-1)
+}
 </script>
 
 <template>
   <main
-    class="w-full mx-auto p-6 flex-col h-screen bg-white md:flex-row lg:gap-4 flex lg:items-center lg:justify-center"
+    class="w-full mx-auto bb-5 p-6 py-10 flex-col h-screen bg-white md:flex-row lg:gap-4 flex lg:items-center lg:justify-center"
   >
     <div class="md:w-7/12 md:mt-28">
       <div class="sticky top-0 bg-white">
-        <h1 class="lg:text-4xl text-2xl font-bold pb-6">Get started in minutes</h1>
-        <p class="text-lg font-semibold">Ready to take your business to the next level?</p>
-        <p class="hidden lg:block">
-          purchase a plan today and unlock exclusive tools, insights, and opportunities.
-        </p>
-        <p class="">Sign up now and start growing!</p>
+        <div class="pb-4 btn btn-sm btn-ghost" @click="goBack">
+          <span class="material-icons-outlined"> arrow_back </span>
+          <span class="font-semibold text-xl">Go Back</span>
+        </div>
+        <div>
+
+          <h1 class="lg:text-4xl text-2xl font-bold pb-6">Get started in minutes</h1>
+          <p class="text-lg font-semibold">Ready to take your business to the next level?</p>
+          <p class="hidden lg:block">
+            purchase a plan today and unlock exclusive tools, insights, and opportunities.
+          </p>
+          <p class="">Sign up now and start growing!</p>
+
+        </div>
+
       </div>
       <div class="">
         <img
-          src="/src/assets/images/road-to-mrkt2.png"
+          src="/images/road-to-mrkt2.png"
           alt="road-to-market-image"
           class="lg:w-9/12 lg:h-1/2"
         />
@@ -263,8 +277,8 @@ const signUp = () => {
           </p>
         </div>
 
-        <div class="mt-5">
-          <form @submit.prevent="signUp">
+        <div class="mt-1">
+          <form @submit.prevent="signUp" class="">
             <!-- Email -->
             <div class="flex flex-col space-y-1">
               <div class="grid grid-cols-2 gap-2">
@@ -403,7 +417,7 @@ const signUp = () => {
               </div>
               <div class="">
                 <label class="label font-semibold text-sm" for="companyPhoneNumber"
-                  >Phone Number</label
+                  >Company Phone Number</label
                 >
                 <input
                   id="companyPhoneNumber"
@@ -451,7 +465,6 @@ const signUp = () => {
             <div class="flex justify-center">
               <span class="material-icons text-rose-500 !text-5xl"> cancel </span>
             </div>
-
           </div>
         </template>
         <template #body>
@@ -459,12 +472,11 @@ const signUp = () => {
             <iframe :src="subscriptionStore.getIframe?.iframeContent" class="w-full h-96"></iframe>
           </div>
           <div v-else class="space-y-4">
-
             <div class="flex justify-center">
               <p class="text-rose-500">Registration Error</p>
             </div>
             <div class="flex justify-center">
-              <p class="font-medium">{{subscriptionStore.getIframe?.message}}</p>
+              <p class="font-medium">{{ subscriptionStore.getIframe?.message }}</p>
             </div>
           </div>
         </template>
