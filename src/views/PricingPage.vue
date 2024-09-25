@@ -46,20 +46,22 @@ subscriptionStore.getPackages().then((response) => {
 </script>
 
 <template>
-  <div class=" flex  justify-center h-screen overflow-y-hidden">
+  <div class=" flex  justify-center h-screen overflow-y-auto">
     <div class="lg:py-8 grid  rounded-xl">
-      <div class="flex justify-center items-center flex-col  w-full">
+      <div class="flex justify-center items-center sticky top-0 flex-col backdrop-blur">
         <h1 class="text-white font-bold md:!text-6xl text-2xl">Choose  your plan</h1>
-        <p class="text-white font-semibold text-2xl pt-6">Unlock endless possibilities</p>
+        <p class="text-white font-semibold text-2xl md:pt-6 pt-2">Unlock endless possibilities</p>
       </div>
-      <div class="md:grid md:grid-cols-6 carousel rounded-box">
-        <div v-for="plan in plans" :key="plan.id" class="carousel-item w-full rounded-xl md:col-span-2 flex justify-center items-center">
-          <div class="plan-card  shadow-2xl rounded-xl px-4 py-6" :class="[plan.name === 'Enterprise Package'? 'border-2  border-soko-500': 'border-soko-500/60']">
+      <div class="grid grid-cols-6 gap-4 md:gap-4 pt-10 mx-6 ">
+        <div v-for="plan in plans" :key="plan.id" class=" w-full rounded-xl md:col-span-2 col-span-6 flex justify-center items-center">
+          <div class="shadow-2xl  rounded-xl px-4 py-6" :class="[plan.name === 'Enterprise Package'? 'border-2  border-soko-500': 'border-soko-500/60']">
             <div class="lg:space-y-4">
               <div class="flex flex-col gap-3">
                 <div class="flex justify-between lg:flex-row flex-col">
                   <div class="flex gap-1 ">
-                    <span class="material-icons text-rose-500">workspace_premium</span>
+                    <span class="material-icons text-soko-500" v-if="plan.name === 'Enterprise Package'">workspace_premium</span>
+                    <span class="material-icons text-soko-300" v-if="plan.name==='Standard Package'"> pattern </span>
+                    <span class="material-icons text-soko-300" v-if="plan.name==='Premium Package'"> military_tech </span>
                     <h1 class="text-xl pb-3 text-white">{{plan.name}}</h1>
                   </div>
                   <div v-if="plan.name === 'Enterprise Package'">
@@ -109,44 +111,6 @@ subscriptionStore.getPackages().then((response) => {
           </div>
         </div>
       </div>
-<!--    <div class="carousel rounded-box w-64">-->
-<!--      <div class="carousel-item w-full">-->
-<!--        <img-->
-<!--          src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"-->
-<!--          class="w-full"-->
-<!--          alt="Tailwind CSS Carousel component" />-->
-<!--      </div>-->
-<!--      <div class="carousel-item w-full">-->
-<!--        <img-->
-<!--          src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"-->
-<!--          class="w-full"-->
-<!--          alt="Tailwind CSS Carousel component" />-->
-<!--      </div>-->
-<!--      <div class="carousel-item w-full">-->
-<!--        <img-->
-<!--          src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp"-->
-<!--          class="w-full"-->
-<!--          alt="Tailwind CSS Carousel component" />-->
-<!--      </div>-->
-<!--      <div class="carousel-item w-full">-->
-<!--        <img-->
-<!--          src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp"-->
-<!--          class="w-full"-->
-<!--          alt="Tailwind CSS Carousel component" />-->
-<!--      </div>-->
-<!--      <div class="carousel-item w-full">-->
-<!--        <img-->
-<!--          src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp"-->
-<!--          class="w-full"-->
-<!--          alt="Tailwind CSS Carousel component" />-->
-<!--      </div>-->
-<!--      <div class="carousel-item w-full">-->
-<!--        <img-->
-<!--          src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp"-->
-<!--          class="w-full"-->
-<!--          alt="Tailwind CSS Carousel component" />-->
-<!--      </div>-->
-<!--    </div>-->
 
   </div>
 </template>
