@@ -283,7 +283,7 @@ router.go(-1)
             <div class="flex flex-col space-y-1">
               <div class="grid grid-cols-2 gap-2">
                 <div class="flex flex-col space-y-1">
-                  <label class="label font-semibold text-sm" for="firstName">first Name </label>
+                  <label class="label font-semibold text-sm text-white" for="firstName">first Name </label>
                   <input
                     id="firstName"
                     v-model="signUpData.firstName"
@@ -304,7 +304,7 @@ router.go(-1)
                   </small>
                 </div>
                 <div class="flex flex-col space-y-1">
-                  <label class="label font-semibold text-sm" for="lastName">Last Name </label>
+                  <label class="label font-semibold text-sm text-white" for="lastName">Last Name </label>
                   <input
                     id="lastName"
                     v-model="signUpData.lastName"
@@ -327,7 +327,7 @@ router.go(-1)
               </div>
 
               <div>
-                <label class="label font-semibold text-sm" for="email"> Email </label>
+                <label class="label font-semibold text-sm text-white" for="email"> Email </label>
                 <input
                   id="email"
                   v-model="signUpData.email"
@@ -345,7 +345,7 @@ router.go(-1)
                 </small>
               </div>
               <div class="">
-                <label class="label font-semibold text-sm" for="phoneNumber">Phone Number</label>
+                <label class="label font-semibold text-sm text-white" for="phoneNumber">Phone Number</label>
                 <input
                   id="phoneNumber"
                   v-model="signUpData.phoneNo"
@@ -368,7 +368,7 @@ router.go(-1)
 
               <div class="grid grid-cols-2 gap-2">
                 <div class="">
-                  <label class="label font-semibold text-sm" for="companyName">
+                  <label class="label font-semibold text-sm text-white" for="companyName">
                     Company Name
                   </label>
                   <input
@@ -392,7 +392,7 @@ router.go(-1)
                 </div>
 
                 <div class="">
-                  <label class="label font-semibold text-sm" for="companyEmail">
+                  <label class="label font-semibold text-sm text-white" for="companyEmail">
                     Company Email
                   </label>
                   <input
@@ -416,7 +416,7 @@ router.go(-1)
                 </div>
               </div>
               <div class="">
-                <label class="label font-semibold text-sm" for="companyPhoneNumber"
+                <label class="label font-semibold text-sm text-white" for="companyPhoneNumber"
                   >Company Phone Number</label
                 >
                 <input

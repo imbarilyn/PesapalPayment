@@ -50,9 +50,8 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
       console.log(response)
       const data = await response.text()
       console.log("!!!", data)
-      isOpenModal.value.isOpen = true
-      if(response.ok){
-
+      if(response.status === 200){
+        isOpenModal.value.isOpen = true
         notification.addNotification('Subscription successful', 'success')
 
        return  iframe.value= {
@@ -60,15 +59,28 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
           iframeContent: data,
         }
       }
+      else if(response.status === 201){
+        try{
+          notification.addNotification('Subscription successful', 'success')
+          setTimeout(()=>{
+            window.location.href = 'https://saas.sokojumla.co.ke/auth/login'
+          },200)
+
+        }
+        catch(error){
+          console.error(error)
+          notification.addNotification('Subscription failed', 'error')
+        }
+      }
       else{
-        notification.addNotification('Subscription failed', 'error')
+        isOpenModal.value.isOpen = true
+        // notification.addNotification('Subscription failed', 'error')
         const {status, message} = JSON.parse(data)
        return iframe.value = {
           isShowPaymentIframe: false,
           iframeContent: '',
          message: message
        }
-
       }
     } catch (error) {
       console.error(error)
