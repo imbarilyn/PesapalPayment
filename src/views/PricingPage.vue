@@ -62,6 +62,7 @@ subscriptionStore.getPackages().then((response) => {
                     <span class="material-icons text-soko-500" v-if="plan.name === 'Enterprise Package'">workspace_premium</span>
                     <span class="material-icons text-soko-300" v-if="plan.name==='Standard Package'"> pattern </span>
                     <span class="material-icons text-soko-300" v-if="plan.name==='Premium Package'"> military_tech </span>
+                    <span class="material-icons text-soko-300" v-if="plan.name==='Free Package'"> insights</span>
                     <h1 class="text-xl pb-3 text-white">{{plan.name}}</h1>
                   </div>
                   <div v-if="plan.name === 'Enterprise Package'">
