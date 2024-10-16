@@ -4,6 +4,7 @@ import { useField } from 'vee-validate'
 import { type PaymentIframe, useSubscriptionStore } from '@/stores'
 import DialogModal from '@/views/toasts/DialogModal.vue'
 import router from '@/router'
+import Swal from 'sweetalert2'
 
 const signUpData = reactive({
   firstName: '',
@@ -207,11 +208,29 @@ const signUp = () => {
     subscriptionStore
       .clientSignup(payload)
       .then((response) => {
-        if (response?.isShowPaymentIframe) {
-          console.log('!!!', response)
-        } else {
-          console.log('Something is wrong')
-          console.log(subscriptionStore.getIframe?.message)
+        if(response.result === 'success') {
+          Swal.fire({
+            title: 'Welcome to Sokojumla',
+            icon: 'success',
+            allowOutsideClick: true,
+            showConfirmButton: false,
+          })
+          setTimeout(() => {
+            Swal.close()
+            window.location.href = "https://saas.sokojumla.co.ke/auth/login"
+          }, 2000)
+        }
+        else if(response.result === 'fail') {
+          Swal.fire({
+            title: 'Error',
+            text: 'An Error has occurred please try again',
+            icon: 'error',
+            allowOutsideClick: true,
+            showConfirmButton: false,
+          })
+          setTimeout(() => {
+            Swal.close()
+          }, 1000)
         }
       })
       .catch((error) => {
@@ -270,7 +289,7 @@ router.go(-1)
             Go back to pricing page?
             <router-link
               class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-              to="/"
+              to="https://sokojumla.com/pricing/"
             >
               Click here
             </router-link>
