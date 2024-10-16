@@ -27,7 +27,6 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
   const isOpenModal = ref({
     isOpen: false
   })
-
   const closeDialog = () =>{
     isOpenModal.value.isOpen = false
   }
@@ -52,7 +51,7 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
       console.log("!!!", data)
       if(response.status === 200){
         isOpenModal.value.isOpen = true
-        notification.addNotification('Subscription successful', 'success')
+        // notification.addNotification('Subscription successful', 'success')
 
        return  iframe.value= {
           isShowPaymentIframe: true,
@@ -60,16 +59,18 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
         }
       }
       else if(response.status === 201){
-        try{
-          notification.addNotification('Subscription successful', 'success')
-          setTimeout(()=>{
-            window.location.href = 'https://saas.sokojumla.co.ke/auth/login'
-          },200)
+        try {
+          return {
+            result: 'success'
+          }// notification.addNotification('Subscription successful', 'success')
 
         }
         catch(error){
           console.error(error)
-          notification.addNotification('Subscription failed', 'error')
+          return {
+            result: 'fail'
+          }
+          // notification.addNotification('Subscription failed', 'error')
         }
       }
       else{
@@ -84,7 +85,9 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
       }
     } catch (error) {
       console.error(error)
-      return
+      return {
+        result: 'fail'
+      }
     }
   }
 
@@ -118,35 +121,6 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
       }
     }
   }
-  //   pesapal subscription
-  // async function subscription() {
-  //   try {
-  //     fetch('https://towersaccocrm.mzawadi.com/pesapal.php')
-  //       .then((response) => {
-  //         return response.text()
-  //       })
-  //       .then((data) => {
-  //         console.log(data)
-  //         isLoadingPayment.value = true
-  //         setTimeout(()=>{
-  //           isLoadingPayment.value = false
-  //         }, 500)
-  //        iframe.value = {
-  //           isShowPaymentIframe: true,
-  //          iframeContent: data
-  //         }
-  //
-  //
-  //
-  //       })
-  //       .catch((error) => {
-  //         console.log(error)
-  //       })
-  //   } catch (error) {
-  //     console.log(error)
-  //     return
-  //   }
-  // }
 
   return {
     clientSignup,
@@ -154,6 +128,6 @@ export const useSubscriptionStore = defineStore('subscriptionStore', () => {
     getIframe,
     iframe,
     isOpenModal,
-    closeDialog
+    closeDialog,
   }
 })
